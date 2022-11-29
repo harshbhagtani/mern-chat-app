@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { REACT_APP_BASE_URL } from '../config';
 
 const getHeaders = (content_type) => {
   let headers = { 'Content-Type': content_type };
@@ -11,7 +12,7 @@ export const fetchDataAndProceed = (
   { data = {}, timeout, method, url, content_type = 'application/json' },
   callback
 ) => {
-  const baseURL = 'http://localhost:3001';
+  const baseURL = REACT_APP_BASE_URL;
 
   let params = {};
   let payload = {};
