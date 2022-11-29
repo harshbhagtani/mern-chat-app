@@ -1,0 +1,1 @@
+export const UPDATE_CHAT_STATE = 'UPDATE_CHAT_STATE';
