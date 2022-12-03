@@ -5,7 +5,7 @@ const Message = require('../models/messages');
 const User = require('../models/users');
 const grid = require('gridfs-stream');
 
-const baseURL = 'https://mern-chatter-webapp21.herokuapp.com';
+const baseURL = 'https://chatter-v8em.onrender.com';
 
 const getAllMessages = async (req, res) => {
   try {

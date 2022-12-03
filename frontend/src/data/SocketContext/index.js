@@ -4,7 +4,7 @@ import { io } from 'socket.io-client';
 import Peer from 'simple-peer';
 export const SocketContext = createContext();
 
-const socket = io('https://mern-chatter-webapp21.herokuapp.com');
+const socket = io('https://chatter-v8em.onrender.com');
 function ContextProvider({ children, user }) {
   console.log(user, 'hii');
   const [socketConnect, setSocketConnect] = useState(false);
