@@ -25,10 +25,11 @@ Full-Stack Chat-app using MERN Stack and Socket.io
 
 Some sneak peek 😎
 
-<img width="1440" alt="image" src="https://user-images.githubusercontent.com/60362486/210270208-4e61c9cc-caa0-4a01-a495-a76b3239b319.png">
-<img width="1440" alt="image" src="https://user-images.githubusercontent.com/60362486/210270266-6d51c249-5e6f-400b-b589-3f0afbf3216f.png">
-<img width="1440" alt="image" src="https://user-images.githubusercontent.com/60362486/210270288-026e1196-492d-46aa-b683-a50cf2f64c33.png">
-<img width="1440" alt="image" src="https://user-images.githubusercontent.com/60362486/210270298-998a6dff-a602-4907-8508-5c35905bf1e6.png">
+![image](https://user-images.githubusercontent.com/60362486/210270602-7f8c7559-79ec-488f-a58e-a45d44611d0d.png)
+![image](https://user-images.githubusercontent.com/60362486/210270480-f539a937-a669-421a-870f-d726bda120db.png)
+![image](https://user-images.githubusercontent.com/60362486/210270522-7857f588-65f8-467d-a6b2-d8a9ad9d5806.png)
+![image](https://user-images.githubusercontent.com/60362486/210270562-a6fa5979-973a-4df6-a303-eea7c7caf047.png)
+
 
 
 
