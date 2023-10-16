@@ -1,26 +1,26 @@
-import { Avatar, Button, Input, message, Modal, Select } from 'antd';
-import React, { useEffect, useState } from 'react';
-import { REACT_APP_BASE_URL } from '../../data/config';
-import { fetchDataAndProceed } from '../../data/utils/utility';
-import ChatTile from './ChatTile';
-import { MdOutlineGroupAdd } from 'react-icons/md';
-import { connect } from 'react-redux';
-import { fetchChatList } from '../../data/redux/chat/action';
+import { Avatar, Button, Input, message, Modal, Select } from "antd";
+import React, { useEffect, useState } from "react";
+import { REACT_APP_BASE_URL } from "../../data/config";
+import { fetchDataAndProceed } from "../../data/utils/utility";
+import ChatTile from "./ChatTile";
+import { MdOutlineGroupAdd } from "react-icons/md";
+import { connect } from "react-redux";
+import { fetchChatList } from "../../data/redux/chat/action";
 
 function ChatList({ user, chatList, dispatch, selectedChat }) {
   const [modalState, setModalState] = useState(false);
   const [userList, setUserList] = useState([]);
-  const [keyword, setKeyword] = useState('');
-  const [groupName, setGroupName] = useState('');
+  const [keyword, setKeyword] = useState("");
+  const [groupName, setGroupName] = useState("");
   const [groupMembers, setGroupMembers] = useState([]);
 
   const modalClose = () => {
     setModalState(false);
     setGroupMembers([]);
-    setGroupName('');
+    setGroupName("");
   };
 
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState("");
   useEffect(() => {
     dispatch(fetchChatList());
   }, []);
@@ -28,8 +28,8 @@ function ChatList({ user, chatList, dispatch, selectedChat }) {
   const getuserByName = () => {
     fetchDataAndProceed(
       {
-        url: '/api/users',
-        method: 'GET',
+        url: "/api/users",
+        method: "GET",
         data: { search: keyword }
       },
       (err, res) => {
@@ -44,10 +44,10 @@ function ChatList({ user, chatList, dispatch, selectedChat }) {
 
   const CreateGroupChat = () => {
     if (groupMembers.length <= 1) {
-      return message.error('Please select atleast 2 group Members');
+      return message.error("Please select atleast 2 group Members");
     }
     if (!groupName) {
-      return message.error('Enter a group name');
+      return message.error("Enter a group name");
     }
     const payload = {
       name: groupName,
@@ -56,9 +56,9 @@ function ChatList({ user, chatList, dispatch, selectedChat }) {
 
     fetchDataAndProceed(
       {
-        url: '/api/chats/group',
+        url: "/api/chats/group",
         data: payload,
-        method: 'POST'
+        method: "POST"
       },
       (err, res) => {
         if (!err && res) {
@@ -72,28 +72,28 @@ function ChatList({ user, chatList, dispatch, selectedChat }) {
     return (
       <>
         <div>
-          <label style={{ fontWeight: '600' }}>Group Name</label>
+          <label style={{ fontWeight: "600" }}>Group Name</label>
           <Input
             placeholder="Type your group name..."
             onChange={(e) => {
               setGroupName(e.target.value);
             }}
-            style={{ borderRadius: '10px', height: '40px' }}
+            style={{ borderRadius: "10px", height: "40px" }}
           ></Input>
         </div>
 
-        <div style={{ marginTop: '20px', fontWeight: '600' }}>Add Members</div>
+        <div style={{ marginTop: "20px", fontWeight: "600" }}>Add Members</div>
         <div className="chat-flex">
           <Input
             placeholder="Search users..."
             onChange={(e) => {
               setKeyword(e.target.value);
             }}
-            style={{ borderRadius: '10px', height: '40px', width: '300px' }}
+            style={{ borderRadius: "10px", height: "40px", width: "300px" }}
           ></Input>
           <Button
             onClick={getuserByName}
-            style={{ borderRadius: '10px', height: '40px', marginLeft: '10px' }}
+            style={{ borderRadius: "10px", height: "40px", marginLeft: "10px" }}
           >
             Go
           </Button>
@@ -107,11 +107,11 @@ function ChatList({ user, chatList, dispatch, selectedChat }) {
               <div
                 className="chat-flex chat-flex-ac"
                 style={{
-                  background: inc ? 'rgba(0, 204, 255, 0.5)' : '#f9f9f9',
-                  width: '300px',
-                  cursor: 'pointer',
-                  borderRadius: '10px',
-                  marginTop: '5px'
+                  background: inc ? "rgba(0, 204, 255, 0.5)" : "#f9f9f9",
+                  width: "300px",
+                  cursor: "pointer",
+                  borderRadius: "10px",
+                  marginTop: "5px"
                 }}
                 onClick={() => {
                   if (inc) {
@@ -122,7 +122,7 @@ function ChatList({ user, chatList, dispatch, selectedChat }) {
                 }}
               >
                 <Avatar src={item.userpic} />
-                <div style={{ marginLeft: '10px' }}>
+                <div style={{ marginLeft: "10px" }}>
                   <span>{item.name}</span>
                   <br></br>
                   <span>{item.email}</span>
@@ -132,12 +132,12 @@ function ChatList({ user, chatList, dispatch, selectedChat }) {
           })}
         </div>
 
-        <div className="chat-flex" style={{ justifyContent: 'flex-end' }}>
+        <div className="chat-flex" style={{ justifyContent: "flex-end" }}>
           <Button
             style={{
-              height: '40px',
-              borderRadius: '10px',
-              marginRight: '10px'
+              height: "40px",
+              borderRadius: "10px",
+              marginRight: "10px"
             }}
             onClick={modalClose}
           >
@@ -145,7 +145,7 @@ function ChatList({ user, chatList, dispatch, selectedChat }) {
           </Button>
           <Button
             type="primary"
-            style={{ height: '40px', borderRadius: '10px' }}
+            style={{ height: "40px", borderRadius: "10px" }}
             onClick={CreateGroupChat}
           >
             Create
@@ -158,17 +158,17 @@ function ChatList({ user, chatList, dispatch, selectedChat }) {
   return (
     <div
       style={{
-        background: 'white',
-        height: '100%',
-        width: '100%',
-        borderRadius: '10px',
-        padding: '15px'
+        background: "white",
+        height: "100%",
+        width: "100%",
+        borderRadius: "10px",
+        padding: "15px"
       }}
     >
       <div className="chat-flex">
         <Input
           placeholder="Search chat..."
-          style={{ height: '40px', borderRadius: '20px' }}
+          style={{ height: "40px", borderRadius: "20px" }}
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         ></Input>
@@ -176,11 +176,17 @@ function ChatList({ user, chatList, dispatch, selectedChat }) {
           icon={<MdOutlineGroupAdd size={20} />}
           type="text"
           title="Group chat"
-          style={{ height: '40px', borderRadius: '50%', width: '40px' }}
+          style={{ height: "40px", borderRadius: "50%", width: "40px" }}
           onClick={() => setModalState(true)}
         ></Button>
       </div>
-      <div style={{ marginTop: '20px' }}>
+      <div
+        style={{
+          marginTop: "20px",
+          height: "calc(100% - 80px)",
+          overflow: "scroll"
+        }}
+      >
         {chatList
           .filter((item) => {
             let chatName = item.chatName;

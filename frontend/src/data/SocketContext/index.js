@@ -1,12 +1,13 @@
-import { createContext, useEffect, useRef, useState } from 'react';
-import { connect } from 'react-redux';
-import { io } from 'socket.io-client';
-import Peer from 'simple-peer';
+import { createContext, useEffect, useRef, useState } from "react";
+import { connect } from "react-redux";
+import { io } from "socket.io-client";
+import Peer from "simple-peer";
 export const SocketContext = createContext();
 
-const socket = io('https://chatter-v8em.onrender.com');
+// const socket = io('https://chatter-v8em.onrender.com');
+const socket = io("http://localhost:3001");
 function ContextProvider({ children, user }) {
-  console.log(user, 'hii');
+  console.log(user, "hii");
   const [socketConnect, setSocketConnect] = useState(false);
   const [stream, setStream] = useState();
   const myVideo = useRef();
@@ -17,8 +18,8 @@ function ContextProvider({ children, user }) {
 
   useEffect(() => {
     if (user.user) {
-      socket.emit('setup', user.user);
-      socket.on('connected', () => {
+      socket.emit("setup", user.user);
+      socket.on("connected", () => {
         setSocketConnect(true);
       });
       navigator.mediaDevices
@@ -27,8 +28,8 @@ function ContextProvider({ children, user }) {
           setStream(currentStream);
           console.log(currentStream);
         });
-      socket.on('callUser', ({ from, signal }) => {
-        console.log('helll', from, signal);
+      socket.on("callUser", ({ from, signal }) => {
+        console.log("helll", from, signal);
         setCall({ isReceivingCall: true, from, signal });
       });
     }
@@ -43,21 +44,21 @@ function ContextProvider({ children, user }) {
       stream
     });
 
-    peer.on('signal', (data) => {
-      socket.emit('answerCall', {
+    peer.on("signal", (data) => {
+      socket.emit("answerCall", {
         signalData: data,
         to: call.from.user._id
       });
     });
 
-    peer.on('stream', (currentStream) => {
+    peer.on("stream", (currentStream) => {
       setCallAccepted(true);
-      console.log('crr', currentStream);
+      console.log("crr", currentStream);
       myVideo.current.srcObject = stream;
       userVideo.current.srcObject = currentStream;
     });
 
-    console.log(call.signal, 'helll');
+    console.log(call.signal, "helll");
     peer.signal(call.signal);
 
     connectionRef.current = peer;
@@ -70,24 +71,24 @@ function ContextProvider({ children, user }) {
       stream
     });
 
-    peer.on('signal', (data) => {
-      socket.emit('callUser', {
+    peer.on("signal", (data) => {
+      socket.emit("callUser", {
         userToCall: id,
         signalData: data,
         from: user
       });
     });
 
-    peer.on('stream', (currentStream) => {
-      console.log('crr', currentStream);
+    peer.on("stream", (currentStream) => {
+      console.log("crr", currentStream);
       myVideo.current.srcObject = stream;
       userVideo.current.srcObject = currentStream;
     });
 
-    socket.on('callAccepted', (signal) => {
+    socket.on("callAccepted", (signal) => {
       setCallAccepted(true);
 
-      console.log('heasklsam', signal);
+      console.log("heasklsam", signal);
       peer.signal(signal);
     });
 

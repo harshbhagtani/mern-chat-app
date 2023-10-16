@@ -7,13 +7,13 @@ import {
   Menu,
   message,
   Modal
-} from 'antd';
-import React, { useContext, useEffect, useState } from 'react';
-import './app.css';
-import ChatList from './ChatList';
-import MessageContainer from './MessageContainer';
-import { MdNotifications } from 'react-icons/md';
-import logo from '../data/assets/chatter.jpeg';
+} from "antd";
+import React, { useContext, useEffect, useState } from "react";
+import "./app.css";
+import ChatList from "./ChatList";
+import MessageContainer from "./MessageContainer";
+import { MdNotifications } from "react-icons/md";
+import logo from "../data/assets/chatter.jpeg";
 import {
   Link,
   Route,
@@ -21,25 +21,25 @@ import {
   useLocation,
   useNavigate,
   useParams
-} from 'react-router-dom';
-import { BsSearch } from 'react-icons/bs';
-import { fetchDataAndProceed } from '../data/utils/utility';
-import { SocketContext } from '../data/SocketContext';
-import sound from '../data/assets/notification.mp3';
-import { useDispatch } from 'react-redux';
-import { fetchChatList } from '../data/redux/chat/action';
-import HomeScreen from './components/HomeScreen';
-import { IoMdCall } from 'react-icons/io';
-import { IoCallOutline } from 'react-icons/io5';
+} from "react-router-dom";
+import { BsSearch } from "react-icons/bs";
+import { fetchDataAndProceed } from "../data/utils/utility";
+import { SocketContext } from "../data/SocketContext";
+import sound from "../data/assets/notification.mp3";
+import { useDispatch } from "react-redux";
+import { fetchChatList } from "../data/redux/chat/action";
+import HomeScreen from "./components/HomeScreen";
+import { IoMdCall } from "react-icons/io";
+import { IoCallOutline } from "react-icons/io5";
 
 function AppContainer({ user }) {
   const navigate = useNavigate();
   const location = useLocation();
   const [drawerState, setDrawerState] = useState(false);
   const [userList, setUserList] = useState([]);
-  const [keyword, setKeyword] = useState('');
+  const [keyword, setKeyword] = useState("");
   const [message, setMessage] = useState([]);
-  const [newMessageList, setNewMessageList] = useState('');
+  const [newMessageList, setNewMessageList] = useState("");
   const [notification, setNotification] = useState(null);
   const [innerWidth, setinnerWidth] = useState(window.innerWidth);
 
@@ -65,12 +65,12 @@ function AppContainer({ user }) {
   } = useContext(SocketContext);
 
   useEffect(() => {
-    socket.on('messageRecieved', (newMessage) => {
+    socket.on("messageRecieved", (newMessage) => {
       setNewMessageList(newMessage);
       playSound();
     });
 
-    window.addEventListener('resize', () => {
+    window.addEventListener("resize", () => {
       setinnerWidth(window.innerWidth);
     });
   }, []);
@@ -83,7 +83,7 @@ function AppContainer({ user }) {
       location.pathname.substring(1) == newMessageList.chat._id
     ) {
       setMessage([...message, newMessageList]);
-      setNewMessageList('');
+      setNewMessageList("");
     } else if (newMessageList) {
       const menu = (
         <Menu>
@@ -110,8 +110,8 @@ function AppContainer({ user }) {
   const getuserByName = () => {
     fetchDataAndProceed(
       {
-        url: '/api/users',
-        method: 'GET',
+        url: "/api/users",
+        method: "GET",
         data: { search: keyword }
       },
       (err, res) => {
@@ -126,8 +126,8 @@ function AppContainer({ user }) {
   const makeoropenChat = (userId) => {
     fetchDataAndProceed(
       {
-        url: '/api/chats',
-        method: 'POST',
+        url: "/api/chats",
+        method: "POST",
         data: { userId }
       },
       (err, res) => {
@@ -140,7 +140,7 @@ function AppContainer({ user }) {
       }
     );
   };
-  console.log(myVideo);
+
   const LiveCalling = () => {
     return (
       <>
@@ -150,7 +150,7 @@ function AppContainer({ user }) {
               className="my-video"
               autoPlay
               ref={myVideo}
-              style={{ width: '250px' }}
+              style={{ width: "250px" }}
             ></video>
             <br></br>
             <span>You</span>
@@ -162,7 +162,7 @@ function AppContainer({ user }) {
                 className="user-video"
                 autoPlay
                 ref={userVideo}
-                style={{ width: '250px' }}
+                style={{ width: "250px" }}
               ></video>
               <br></br>
               <span>Friend</span>
@@ -186,24 +186,24 @@ function AppContainer({ user }) {
             value={keyword}
             onChange={(e) => setKeyword(e.target.value)}
             placeholder="Search users..."
-            style={{ height: '40px', borderRadius: '10px', width: '250px' }}
+            style={{ height: "40px", borderRadius: "10px", width: "250px" }}
           ></Input>
           <Button
             onClick={getuserByName}
-            style={{ height: '40px', borderRadius: '10px' }}
+            style={{ height: "40px", borderRadius: "10px" }}
           >
             Go
           </Button>
         </div>
-        <div style={{ marginTop: '20px' }}>
+        <div style={{ marginTop: "20px" }}>
           {userList.map((item) => {
             return (
               <div
                 style={{
-                  background: '#f9f9f9',
-                  padding: '5px',
-                  borderRadius: '5px',
-                  cursor: 'pointer'
+                  background: "#f9f9f9",
+                  padding: "5px",
+                  borderRadius: "5px",
+                  cursor: "pointer"
                 }}
                 onClick={() => makeoropenChat(item._id)}
                 className="chat-flex chat-flex-ac"
@@ -211,9 +211,9 @@ function AppContainer({ user }) {
                 <div>
                   <Avatar src={item.userpic} />
                 </div>
-                <div style={{ marginLeft: '10px' }}>
+                <div style={{ marginLeft: "10px" }}>
                   <div>{item.name}</div>
-                  <div style={{ fontSize: '12px' }}>{item.email}</div>
+                  <div style={{ fontSize: "12px" }}>{item.email}</div>
                 </div>
               </div>
             );
@@ -225,16 +225,16 @@ function AppContainer({ user }) {
 
   const items = [
     {
-      key: '1',
+      key: "1",
       label: <Link to="/profile">My Profile</Link>
     },
     {
-      key: '2',
+      key: "2",
       label: (
         <div
           onClick={() => {
             localStorage.clear();
-            navigate('/signin');
+            navigate("/signin");
           }}
         >
           Logout
@@ -248,19 +248,19 @@ function AppContainer({ user }) {
       {call?.isReceivingCall && (
         <div
           style={{
-            position: 'absolute',
-            zIndex: '100',
-            background: 'white',
-            width: '300px',
-            height: '60px',
-            top: '70px',
-            right: '0',
-            padding: '5px',
-            borderRadius: '5px'
+            position: "absolute",
+            zIndex: "100",
+            background: "white",
+            width: "300px",
+            height: "60px",
+            top: "70px",
+            right: "0",
+            padding: "5px",
+            borderRadius: "5px"
           }}
           className="chat-flex chat-flex-ac"
         >
-          <span style={{ fontSize: '16px' }}>
+          <span style={{ fontSize: "16px" }}>
             Call from {call?.from?.user?.name}
           </span>
           <Button
@@ -275,33 +275,33 @@ function AppContainer({ user }) {
       <div className="app-header">
         <div
           className="chat-flex chat-flex-ac"
-          style={{ cursor: 'pointer' }}
+          style={{ cursor: "pointer" }}
           onClick={() => setDrawerState(true)}
         >
           <BsSearch />
-          <div style={{ marginLeft: '10px' }}>Search users</div>
+          <div style={{ marginLeft: "10px" }}>Search users</div>
         </div>
 
         <div className="chat-flex chat-flex-ac">
-          <img src={logo} style={{ width: '150px', marginRight: '50px' }}></img>
+          <img src={logo} style={{ width: "150px", marginRight: "50px" }}></img>
           {notification ? (
-            <Dropdown trigger={['click']} overlay={notification}>
+            <Dropdown trigger={["click"]} overlay={notification}>
               <Button
                 icon={<MdNotifications size={26} />}
                 type="text"
-                style={{ marginRight: '30px', position: 'relative' }}
+                style={{ marginRight: "30px", position: "relative" }}
               >
                 <div
                   style={{
-                    position: 'absolute',
+                    position: "absolute",
                     top: 0,
-                    background: 'red',
-                    borderRadius: '50%',
-                    display: 'inline-block',
-                    width: '20px',
-                    height: '20px',
+                    background: "red",
+                    borderRadius: "50%",
+                    display: "inline-block",
+                    width: "20px",
+                    height: "20px",
 
-                    color: 'white'
+                    color: "white"
                   }}
                 >
                   {1}
@@ -313,18 +313,18 @@ function AppContainer({ user }) {
               <Button
                 icon={<MdNotifications size={26} />}
                 type="text"
-                style={{ marginRight: '30px', position: 'relative' }}
+                style={{ marginRight: "30px", position: "relative" }}
               ></Button>
             </>
           )}
 
           <Dropdown
-            trigger={['click']}
+            trigger={["click"]}
             menu={{
               items
             }}
           >
-            <Avatar src={user?.userpic} style={{ cursor: 'pointer' }}></Avatar>
+            <Avatar src={user?.userpic} style={{ cursor: "pointer" }}></Avatar>
           </Dropdown>
         </div>
       </div>
