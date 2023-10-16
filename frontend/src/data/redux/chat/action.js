@@ -1,5 +1,5 @@
-import { fetchDataAndProceed } from '../../utils/utility';
-import { UPDATE_CHAT_STATE } from './actionTypes';
+import { fetchDataAndProceed } from "../../utils/utility";
+import { UPDATE_CHAT_STATE } from "./actionTypes";
 
 export const updateChatState = (payload) => {
   return {
@@ -13,10 +13,9 @@ export const fetchChatList = () => {
     fetchDataAndProceed(
       {
         url: `/api/chats`,
-        method: 'GET'
+        method: "GET"
       },
       (err, res) => {
-        console.log(res, 'ahrsh');
         if (!err && res) {
           dispatch(updateChatState({ chat_list: res.data }));
         }
@@ -30,10 +29,9 @@ export const fetchChatData = (id) => {
     fetchDataAndProceed(
       {
         url: `/api/chats/${id}`,
-        method: 'GET'
+        method: "GET"
       },
       (err, res) => {
-        console.log(res, 'ahrsh');
         if (!err && res) {
           dispatch(updateChatState({ selected_chat: res.data }));
         }

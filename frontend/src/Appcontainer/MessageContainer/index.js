@@ -63,7 +63,6 @@ function MessageContainer({
         method: "GET"
       },
       (err, res) => {
-        console.log(res);
         if (!err && res.data) {
           setMessage(res.data);
           setLoading(false);
@@ -111,7 +110,7 @@ function MessageContainer({
       socket.off("stop typing", listenoff);
     };
   }, [chatList, params?.roomid]);
-  console.log(isTyping, "hh");
+
   const typingIndicator = (e) => {
     setContent(e.target.value);
 
@@ -197,7 +196,7 @@ function MessageContainer({
             if (item._id == params.roomid) return res.data;
             else return item;
           });
-          console.log(newChatList, res.data);
+
           dispatch(updateChatState({ chat_list: newChatList }));
         }
       }
@@ -222,7 +221,7 @@ function MessageContainer({
         if (!err && res) {
           setModal(false);
           setAttachment(null);
-          console.log(res.data);
+
           socket.emit("newMessageSend", res.data);
           setMessage([...message, res.data]);
         }
@@ -236,16 +235,13 @@ function MessageContainer({
     },
 
     beforeUpload: (file) => {
-      console.log(file);
       if (file.size > 10000000)
         message.error("File size greater than 10 MB not allowed");
       else setAttachment(file);
       return false;
     },
     fileList: !attachment ? [] : [attachment],
-    onDrop(e) {
-      console.log("Dropped files", e.dataTransfer.files);
-    }
+    onDrop(e) {}
   };
 
   const renderUploadBox = () => {
@@ -408,7 +404,6 @@ function MessageContainer({
                 width="100%"
                 height={300}
                 onEmojiClick={(value) => {
-                  console.log(value);
                   let newMessage = content + value.emoji;
                   setContent(newMessage);
                 }}

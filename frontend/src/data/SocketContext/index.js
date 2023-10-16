@@ -29,7 +29,6 @@ function ContextProvider({ children, user }) {
           console.log(currentStream);
         });
       socket.on("callUser", ({ from, signal }) => {
-        console.log("helll", from, signal);
         setCall({ isReceivingCall: true, from, signal });
       });
     }
@@ -53,12 +52,11 @@ function ContextProvider({ children, user }) {
 
     peer.on("stream", (currentStream) => {
       setCallAccepted(true);
-      console.log("crr", currentStream);
+
       myVideo.current.srcObject = stream;
       userVideo.current.srcObject = currentStream;
     });
 
-    console.log(call.signal, "helll");
     peer.signal(call.signal);
 
     connectionRef.current = peer;
@@ -80,7 +78,6 @@ function ContextProvider({ children, user }) {
     });
 
     peer.on("stream", (currentStream) => {
-      console.log("crr", currentStream);
       myVideo.current.srcObject = stream;
       userVideo.current.srcObject = currentStream;
     });
@@ -88,13 +85,10 @@ function ContextProvider({ children, user }) {
     socket.on("callAccepted", (signal) => {
       setCallAccepted(true);
 
-      console.log("heasklsam", signal);
       peer.signal(signal);
     });
 
     connectionRef.current = peer;
-
-    console.log(id);
   };
 
   const leaveCall = () => {
