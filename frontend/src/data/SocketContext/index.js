@@ -4,8 +4,8 @@ import { io } from "socket.io-client";
 import Peer from "simple-peer";
 export const SocketContext = createContext();
 
-// const socket = io('https://chatter-v8em.onrender.com');
-const socket = io("http://localhost:3001");
+const socket = io("https://chatter-v8em.onrender.com");
+// const socket = io("http://localhost:3001");
 function ContextProvider({ children, user }) {
   console.log(user, "hii");
   const [socketConnect, setSocketConnect] = useState(false);
