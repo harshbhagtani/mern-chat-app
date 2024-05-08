@@ -19,7 +19,7 @@ connectDb();
 console.log(process.env.MONGO_URI);
 const io = require("socket.io")(server, {
   cors: {
-    origin: "https://chatterrrr.netlify.app",
+    origin: "*",
     methods: ["GET", "POST"]
   }
 });
